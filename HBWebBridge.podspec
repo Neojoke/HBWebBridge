@@ -21,14 +21,14 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/394570610@qq.com/HBWebBridge'
+  s.homepage         = 'http://10.0.30.24/Hbec_IOS_common/HBWebBridge'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '394570610@qq.com' => 'wupeng@touker.com' }
-  s.source           = { :git => 'https://github.com/394570610@qq.com/HBWebBridge.git', :tag => s.version.to_s }
+  s.author           = { 'wupeng@touker.com' => 'wupeng@touker.com' }
+  s.source           = { :git => 'git@10.0.30.24:Hbec_IOS_common/HBWebBridge.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '7.0'
 
   s.source_files = 'HBWebBridge/Classes/**/*'
   
@@ -37,6 +37,6 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'JavaScriptCore'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

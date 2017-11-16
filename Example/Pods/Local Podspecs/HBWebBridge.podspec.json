@@ -1,0 +1,22 @@
+{
+  "name": "HBWebBridge",
+  "version": "0.1.0",
+  "summary": "A short description of HBWebBridge.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/394570610@qq.com/HBWebBridge",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "394570610@qq.com": "wupeng@touker.com"
+  },
+  "source": {
+    "git": "https://github.com/394570610@qq.com/HBWebBridge.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "HBWebBridge/Classes/**/*"
+}

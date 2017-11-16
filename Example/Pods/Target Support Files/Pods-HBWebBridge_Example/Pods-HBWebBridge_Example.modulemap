@@ -1,0 +1,6 @@
+framework module Pods_HBWebBridge_Example {
+  umbrella header "Pods-HBWebBridge_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
