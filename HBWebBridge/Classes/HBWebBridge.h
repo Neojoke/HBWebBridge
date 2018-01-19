@@ -7,9 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-
+typedef void(^HBWebBridgeErrorCallBack)(NSError * error);
+typedef void(^HBWebBridgeSuccessCallBack)(NSDictionary * responseDict);
+typedef NSDictionary *(^HBWebBridgeHandlerSyncCallBack)(NSDictionary *);
+typedef void(^HBWebBridgeHandlerCallBack)(NSDictionary * params,HBWebBridgeErrorCallBack errorCallBack,HBWebBridgeSuccessCallBack successCallBack);
 @interface HBWebBridge : NSObject
 @property(nonatomic,strong)NSMutableDictionary * handlers;
+@property(nonatomic,strong)NSMutableDictionary * syncHandlers;
 
 /**
  对JavaScript开放的接口，详情参照wiki文档说明
@@ -24,5 +28,8 @@
  @param actionHandlerName 对JavaScript开放提供的Method名称
  @param callBack 逻辑执行的block，参数有成功和失败的回调block，在业务完成以后，如果成功，block传入成功结果的字典，如果失败，则使用HBAuthError定义的ErrorCode返回错误
  */
--(void)addActionHandler:(NSString *)actionHandlerName forCallBack:(void(^)(NSDictionary * params,void(^errorCallBack)(NSError * error),void(^successCallBack)(NSDictionary * responseDict)))callBack;
+-(void)addActionHandler:(NSString *)actionHandlerName forCallBack:(HBWebBridgeHandlerCallBack)callBack;
+
+-(JSValue *)callRouterSync:(JSValue*)requestObject;
+-(void)addSyncActionHandler:(NSString *)actionHandlerName forCallBack:(HBWebBridgeHandlerSyncCallBack)callBack;
 @end

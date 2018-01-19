@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HBWebBridge'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'JS与原生通讯的路由，该路由目前支持JavaScriptCore，后期将支持WKWebView的JavaScript交互'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '7.0'
 
   s.source_files = 'HBWebBridge/Classes/**/*'
-  
+  s.public_header_files = 'HBWebBridge/Classes/*.h'
   # s.resource_bundles = {
   #   'HBWebBridge' => ['HBWebBridge/Assets/*.png']
   # }

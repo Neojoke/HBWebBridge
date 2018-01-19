@@ -1,22 +1,24 @@
 {
   "name": "HBWebBridge",
-  "version": "0.1.0",
-  "summary": "A short description of HBWebBridge.",
+  "version": "0.1.1",
+  "summary": "JS与原生通讯的路由，该路由目前支持JavaScriptCore，后期将支持WKWebView的JavaScript交互",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/394570610@qq.com/HBWebBridge",
+  "homepage": "http://10.0.30.24/Hbec_IOS_common/HBWebBridge",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "394570610@qq.com": "wupeng@touker.com"
+    "wupeng@touker.com": "wupeng@touker.com"
   },
   "source": {
-    "git": "https://github.com/394570610@qq.com/HBWebBridge.git",
-    "tag": "0.1.0"
+    "git": "git@10.0.30.24:Hbec_IOS_common/HBWebBridge.git",
+    "tag": "0.1.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "7.0"
   },
-  "source_files": "HBWebBridge/Classes/**/*"
+  "source_files": "HBWebBridge/Classes/**/*",
+  "public_header_files": "HBWebBridge/Classes/*.h",
+  "frameworks": "JavaScriptCore"
 }

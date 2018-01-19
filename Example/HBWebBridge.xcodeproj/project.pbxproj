@@ -63,9 +63,9 @@
 		B0516A63EB1B3FC08817C712 /* Pods-HBWebBridge_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBWebBridge_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-HBWebBridge_Example/Pods-HBWebBridge_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B5F59EF4277C132FAAB960C3 /* Pods-HBWebBridge_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBWebBridge_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HBWebBridge_Tests/Pods-HBWebBridge_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BCCF075E7CCDBAE30F4F4A33 /* Pods_HBWebBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBWebBridge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAC936680958E5F9B4271758 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		DF3AA91ED40B86452FD2CECC /* HBWebBridge.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = HBWebBridge.podspec; path = ../HBWebBridge.podspec; sourceTree = "<group>"; };
-		E46E420A38032CA768D54A00 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		DAC936680958E5F9B4271758 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		DF3AA91ED40B86452FD2CECC /* HBWebBridge.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBWebBridge.podspec; path = ../HBWebBridge.podspec; sourceTree = "<group>"; };
+		E46E420A38032CA768D54A00 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E62D436831B4DFED4088B12A /* Pods_HBWebBridge_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBWebBridge_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -250,6 +250,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "394570610@qq.com";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = QG479838Q3;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -538,6 +541,7 @@
 			baseConfigurationReference = 212F10C247DD9B02F967B229 /* Pods-HBWebBridge_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QG479838Q3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBWebBridge/HBWebBridge-Prefix.pch";
 				INFOPLIST_FILE = "HBWebBridge/HBWebBridge-Info.plist";
@@ -553,6 +557,7 @@
 			baseConfigurationReference = B0516A63EB1B3FC08817C712 /* Pods-HBWebBridge_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QG479838Q3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBWebBridge/HBWebBridge-Prefix.pch";
 				INFOPLIST_FILE = "HBWebBridge/HBWebBridge-Info.plist";
