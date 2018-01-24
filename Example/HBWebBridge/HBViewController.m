@@ -22,7 +22,7 @@ JSExportAs(callRouterSync,-(JSValue *)callRouterSync:(JSValue*)requestObject);
 @end
 @implementation HBTestWebViewBridge
 @end
-@interface HBViewController ()
+@interface HBViewController ()<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 @property(nonatomic,strong)JSContext * context;
 @property(nonatomic,strong)HBTestWebViewBridge * bridge;
@@ -34,7 +34,9 @@ JSExportAs(callRouterSync,-(JSValue *)callRouterSync:(JSValue*)requestObject);
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureJSContext) name:@"DidCreateContextNotification" object:nil];
+    self.webview.delegate = self;
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.31.133:8000/#/"]]];
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 -(void)captureJSContext{
@@ -46,7 +48,7 @@ JSExportAs(callRouterSync,-(JSValue *)callRouterSync:(JSValue*)requestObject);
     [self.bridge addSyncActionHandler:@"sync" forCallBack:^NSDictionary *(NSDictionary *params) {
         return @{@"result":@{}};
     }];
-    self.context[@"bridge"] = self.bridge;
+    self.context[@"hb_ios_bridge"] = self.bridge;
 }
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     
