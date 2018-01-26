@@ -48,7 +48,7 @@ JSExportAs(callRouterSync,-(JSValue *)callRouterSync:(JSValue*)requestObject);
     [self.bridge addSyncActionHandler:@"sync" forCallBack:^NSDictionary *(NSDictionary *params) {
         return @{@"result":@{}};
     }];
-    self.context[@"hb_ios_bridge"] = self.bridge;
+    self.context[@"hb_mb_bridge"] = self.bridge;
 }
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     
