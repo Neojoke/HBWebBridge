@@ -28,23 +28,34 @@
         NSDictionary * params = [dict objectForKey:@"Data"];
         __weak HBWebBridge * weakSelf = self;
         dispatch_block_t callBackBlock = ^(){
+           
             [weakSelf callAction:methodName params:params success:^(NSDictionary *responseDict) {
+                NSString * result;
                 if (responseDict != nil) {
-                    NSString * result = [self responseStringWith:responseDict];
-                    if (result) {
-                        
-                    }
+                    result = [self responseStringWith:responseDict];
+                }
+                else{
+                    result = @"null";
+                }
+                if (callBack.isNull || callBack.isUndefined) {
+                    //Do nothing.
+                }
+                else{
                     [callBack callWithArguments:@[@"null",result]];
                 }
-                else{
-                    [callBack callWithArguments:@[@"null",@"null"]];
-                }
             } failure:^(NSError *error) {
+                NSString * errorMsg;
                 if (error) {
-                    [callBack callWithArguments:@[[error description],@"null"]];
+                    errorMsg =[error description];
                 }
                 else{
-                    [callBack callWithArguments:@[@"App Inner Error",@"null"]];
+                    errorMsg= @"App Inner Error!";
+                }
+                if (callBack.isNull || callBack.isUndefined) {
+                    
+                }else{
+                    [callBack callWithArguments:@[errorMsg,@"null"]];
+
                 }
             }];
         };
@@ -58,7 +69,12 @@
         }
     }
     else{
-        [callBack callWithArguments:@[@"methodName missing.",@"null"]];
+        if (callBack.isNull || callBack.isUndefined) {
+            
+        }
+        else{
+            [callBack callWithArguments:@[@"methodName missing.",@"null"]];
+        }
     }
     return;
 }
