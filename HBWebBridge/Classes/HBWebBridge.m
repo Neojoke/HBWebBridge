@@ -27,7 +27,7 @@
     if (methodName != nil && methodName.length>0) {
         NSDictionary * params = [dict objectForKey:@"Data"];
         __weak HBWebBridge * weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_block_t callBackBlock = ^(){
             [weakSelf callAction:methodName params:params success:^(NSDictionary *responseDict) {
                 if (responseDict != nil) {
                     NSString * result = [self responseStringWith:responseDict];
@@ -47,7 +47,15 @@
                     [callBack callWithArguments:@[@"App Inner Error",@"null"]];
                 }
             }];
-        });
+        };
+        if ([NSThread isMainThread]) {
+            callBackBlock();
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                callBackBlock();
+            });
+        }
     }
     else{
         [callBack callWithArguments:@[@"methodName missing.",@"null"]];
