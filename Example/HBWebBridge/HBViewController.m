@@ -35,8 +35,8 @@ JSExportAs(callRouterSync,-(JSValue *)callRouterSync:(JSValue*)requestObject);
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureJSContext) name:@"DidCreateContextNotification" object:nil];
     self.webview.delegate = self;
-    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.31.133:8000/#/"]]];
-
+//    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://10.0.31.133:8000/#/"]]];
+[self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8000/#/"]]];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 -(void)captureJSContext{

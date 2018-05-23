@@ -23,6 +23,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		7B58BE4CC23EC33B2228DA79 /* Pods_HBWebBridge_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCF075E7CCDBAE30F4F4A33 /* Pods_HBWebBridge_Tests.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		B5F6147520B3E2810010A1A9 /* HBWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F6147420B3E2810010A1A9 /* HBWKWebViewController.m */; };
 		E30916221B02EDAB3082C5AD /* Pods_HBWebBridge_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D436831B4DFED4088B12A /* Pods_HBWebBridge_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,8 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B0516A63EB1B3FC08817C712 /* Pods-HBWebBridge_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBWebBridge_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-HBWebBridge_Example/Pods-HBWebBridge_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B5F59EF4277C132FAAB960C3 /* Pods-HBWebBridge_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBWebBridge_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HBWebBridge_Tests/Pods-HBWebBridge_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		B5F6147320B3E2810010A1A9 /* HBWKWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBWKWebViewController.h; sourceTree = "<group>"; };
+		B5F6147420B3E2810010A1A9 /* HBWKWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBWKWebViewController.m; sourceTree = "<group>"; };
 		BCCF075E7CCDBAE30F4F4A33 /* Pods_HBWebBridge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HBWebBridge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC936680958E5F9B4271758 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DF3AA91ED40B86452FD2CECC /* HBWebBridge.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBWebBridge.podspec; path = ../HBWebBridge.podspec; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* HBViewController.h */,
 				6003F5A6195388D20070C39A /* HBViewController.m */,
+				B5F6147320B3E2810010A1A9 /* HBWKWebViewController.h */,
+				B5F6147420B3E2810010A1A9 /* HBWKWebViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -414,6 +419,7 @@
 				6003F59E195388D20070C39A /* HBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* HBViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				B5F6147520B3E2810010A1A9 /* HBWKWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +551,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBWebBridge/HBWebBridge-Prefix.pch";
 				INFOPLIST_FILE = "HBWebBridge/HBWebBridge-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -561,6 +568,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HBWebBridge/HBWebBridge-Prefix.pch";
 				INFOPLIST_FILE = "HBWebBridge/HBWebBridge-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
