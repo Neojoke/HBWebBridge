@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HBWebBridge'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'JS与原生通讯的路由，该路由目前支持JavaScriptCore，后期将支持WKWebView的JavaScript交互'
 
 # This description is used to generate tags and improve search results.

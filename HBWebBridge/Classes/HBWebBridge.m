@@ -6,12 +6,14 @@
 //
 
 #import "HBWebBridge.h"
-
+@interface HBWebBridge()
+@end
 @implementation HBWebBridge
 //FIXME: 修改回调机制，提供上层业务处理的失败回调方法，call由上层提供，经此层转换
 -(NSMutableDictionary *)handlers{
     if (_handlers == nil) {
         _handlers = [NSMutableDictionary dictionary];
+        
     }
     return _handlers;
 }
@@ -145,6 +147,91 @@
     }
     else{
         return nil;
+    }
+}
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message;
+{
+    id body = message.body;
+    if([body isKindOfClass:[NSDictionary class]]){
+        NSDictionary * requestDict = (NSDictionary *)body;
+        NSString * methodName = [requestDict objectForKey:@"Method"];
+        NSString * callBackName = [requestDict objectForKey:@"CB_iOS"];
+        if (callBackName == nil || ([callBackName isKindOfClass:[NSString class]] &&callBackName.length==0)) {
+            //Do nothing.
+            return;
+        }
+        void (^callWKJSCallBackBlock)(NSString *,NSString * ,NSString *) = ^(NSString * windowCBName,NSString * errorMsg,NSString * reponseData){
+            if ([errorMsg isKindOfClass:[NSString class]]) {
+                if (errorMsg.length == 0) {
+                    errorMsg = @"null";
+                }
+                else{
+                    errorMsg =[NSString stringWithFormat:@"'%@'",errorMsg] ;
+                }
+            }
+            else if (errorMsg ==nil){
+                errorMsg = @"null";
+            }
+            else{
+                errorMsg =[NSString stringWithFormat:@"'%@'",[errorMsg description]] ;
+            }
+            NSString * resultDataString;
+            if (errorMsg && ![errorMsg isEqualToString:@"null"]) {
+                resultDataString =@"null";
+            }
+            else{
+                resultDataString =[NSString stringWithFormat:@"'%@',",reponseData] ;
+            }
+            NSString * javaScript;
+            javaScript = [NSString stringWithFormat:@"%@(%@,%@);",windowCBName,errorMsg,resultDataString];
+            javaScript = [javaScript stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+            javaScript = [javaScript stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+            javaScript = [javaScript stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+            [message.webView evaluateJavaScript:javaScript completionHandler:^(id _Nullable o, NSError * _Nullable error) {
+                NSLog(@"HBWebBridge WK Error: \n%@",error);
+            }];
+        };
+        NSString * callBackFuncName = [NSString stringWithFormat:@"window.%@",callBackName];
+        if (methodName != nil && methodName.length>0) {
+            NSDictionary * params = [requestDict objectForKey:@"Data"];
+            __weak HBWebBridge * weakSelf = self;
+            dispatch_block_t callNativeBlock = ^(){
+                [weakSelf callAction:methodName params:params success:^(NSDictionary *responseDict) {
+                    NSString * result;
+                    if (responseDict != nil) {
+                        result = [self responseStringWith:responseDict];
+                    }
+                    else{
+                        result = @"null";
+                    }
+                    callWKJSCallBackBlock(callBackFuncName,@"null",result);
+                } failure:^(NSError *error) {
+                    NSString * errorMsg;
+                    if (error) {
+                        errorMsg =[error description];
+                    }
+                    else{
+                        errorMsg= @"App Inner Error!";
+                    }
+                    callWKJSCallBackBlock(callBackFuncName,errorMsg,@"null");
+                }];
+            };
+            if ([NSThread isMainThread]) {
+                callNativeBlock();
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    callNativeBlock();
+                });
+            }
+        }
+        else{
+            callWKJSCallBackBlock(callBackFuncName,@"methodName missing.",@"null");
+        }
+        
+    }
+    else{
+        NSLog(@"HBWebBridge wk bridge message is null");
     }
 }
 @end
