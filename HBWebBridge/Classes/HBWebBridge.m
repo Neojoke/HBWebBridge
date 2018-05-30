@@ -204,7 +204,14 @@
                     else{
                         result = @"null";
                     }
-                    callWKJSCallBackBlock(callBackFuncName,@"null",result);
+                    if ([NSThread isMainThread]) {
+                        callWKJSCallBackBlock(callBackFuncName,@"null",result);
+                    }
+                    else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            callWKJSCallBackBlock(callBackFuncName,@"null",result);
+                        });
+                    }
                 } failure:^(NSError *error) {
                     NSString * errorMsg;
                     if (error) {
@@ -213,7 +220,14 @@
                     else{
                         errorMsg= @"App Inner Error!";
                     }
-                    callWKJSCallBackBlock(callBackFuncName,errorMsg,@"null");
+                    if ([NSThread isMainThread]) {
+                        callWKJSCallBackBlock(callBackFuncName,errorMsg,@"null");
+                    }
+                    else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            callWKJSCallBackBlock(callBackFuncName,errorMsg,@"null");
+                        });
+                    }
                 }];
             };
             if ([NSThread isMainThread]) {
