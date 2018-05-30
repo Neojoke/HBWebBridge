@@ -15,7 +15,7 @@ typedef NSDictionary *(^HBWebBridgeHandlerSyncCallBack)(NSDictionary *);
 typedef void(^HBWebBridgeHandlerCallBack)(NSDictionary * params,HBWebBridgeErrorCallBack errorCallBack,HBWebBridgeSuccessCallBack successCallBack);
 @interface HBWebBridge : NSObject<WKScriptMessageHandler>
 @property(nonatomic,strong)NSMutableDictionary * handlers;
-@property(nonatomic,strong)NSMutableDictionary * syncHandlers;
+@property(nonatomic,strong)NSMutableDictionary * syncHandlers HBWebBridgeDeprecated("该方法仅使用于UIWebView");;
 
 /**
  对JavaScript开放的接口，详情参照wiki文档说明
@@ -34,5 +34,9 @@ typedef void(^HBWebBridgeHandlerCallBack)(NSDictionary * params,HBWebBridgeError
  @param callBack 逻辑执行的block，参数有成功和失败的回调block，在业务完成以后，如果成功，block传入成功结果的字典，如果失败，则使用HBAuthError定义的ErrorCode返回错误
  */
 -(void)addActionHandler:(NSString *)actionHandlerName forCallBack:(HBWebBridgeHandlerCallBack)callBack;
--(void)addSyncActionHandler:(NSString *)actionHandlerName forCallBack:(HBWebBridgeHandlerSyncCallBack)callBack;
+-(void)addSyncActionHandler:(NSString *)actionHandlerName forCallBack:(HBWebBridgeHandlerSyncCallBack)callBack HBWebBridgeDeprecated("该方法仅使用于UIWebView");
+-(WKUserScript *)getDefaultScriptWithBridgeName:(NSString *)bridgeName;
+-(WKUserScript *)getUserScriptForSyncMethodWithBridgeName:(NSString *)bridgeName methodName:(NSString *)methodName resultString:(NSString *)resultString injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly;
+
+-(WKUserScript *)getUserScriptForSyncMethodWithBridgeName:(NSString *)bridgeName methodName:(NSString *)methodName result:(id)result injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly;
 @end

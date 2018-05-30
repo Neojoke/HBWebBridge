@@ -57,6 +57,7 @@
     WKUserContentController * user_controller = [[WKUserContentController alloc]init];
     configuration.userContentController = user_controller;
     CGRect react = [UIScreen mainScreen].bounds;
+    
     self.webView = [[WKWebView alloc]initWithFrame:react configuration:configuration];
     [self.view addSubview:self.webView];
     HBWebBridge * bridge = [[HBWebBridge alloc]init];
@@ -67,6 +68,12 @@
     [bridge addActionHandler:@"Error" forCallBack:^(NSDictionary *params, HBWebBridgeErrorCallBack errorCallBack, HBWebBridgeSuccessCallBack successCallBack) {
         errorCallBack([NSError errorWithDomain:@"1123" code:255555 userInfo:nil]);
     }];
+    WKUserScript * defaultScript = [bridge getDefaultScriptWithBridgeName:@"hb_mb_bridge"];
+    WKUserScript * hello_script = [bridge getUserScriptForSyncMethodWithBridgeName:@"hb_mb_bridge" methodName:@"hello_sync" result:@"hello world!" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+    WKUserScript * fire_script = [bridge getUserScriptForSyncMethodWithBridgeName:@"hb_mb_bridge" methodName:@"fire_sync" result:@{@"fire":@"123"} injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+    [user_controller addUserScript:defaultScript];
+    [user_controller addUserScript:hello_script];
+    [user_controller addUserScript:fire_script];
     [user_controller addScriptMessageHandler:bridge name:@"hb_mb_bridge"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8000/#/"]]];
     self.webView.navigationDelegate = self;

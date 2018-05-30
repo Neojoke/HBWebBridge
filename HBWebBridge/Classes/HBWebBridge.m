@@ -234,4 +234,46 @@
         NSLog(@"HBWebBridge wk bridge message is null");
     }
 }
+-(WKUserScript *)getUserScriptForSyncMethodWithBridgeName:(NSString *)bridgeName methodName:(NSString *)methodName result:(id)result injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly{
+    NSString * resultString = [HBWebBridge convertToJSONData:result];
+    return [self getUserScriptForSyncMethodWithBridgeName:bridgeName methodName:methodName resultString:resultString injectionTime:injectionTime forMainFrameOnly:forMainFrameOnly];
+}
+-(WKUserScript *)getDefaultScriptWithBridgeName:(NSString *)bridgeName{
+    NSString * sourceString = [NSString stringWithFormat:@"try { window['%@'] = {} }catch (error) {}",bridgeName];
+    WKUserScript * userScript = [[WKUserScript alloc]initWithSource:sourceString injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+    return userScript;
+
+}
+-(WKUserScript *)getUserScriptForSyncMethodWithBridgeName:(NSString *)bridgeName methodName:(NSString *)methodName resultString:(NSString *)resultString injectionTime:(WKUserScriptInjectionTime)injectionTime forMainFrameOnly:(BOOL)forMainFrameOnly{
+    NSString * sourceString = [NSString stringWithFormat:@"try { window['%@']['%@'] = function(requestString){ return '%@' } }catch (error) {};",bridgeName,methodName,resultString];
+    WKUserScript * userScript = [[WKUserScript alloc]initWithSource:sourceString injectionTime:injectionTime forMainFrameOnly:forMainFrameOnly];
+    return userScript;
+}
+
++ (NSString*)convertToJSONData:(id)infoDict
+{
+    if ([infoDict isKindOfClass:[NSString class]]) {
+        return (NSString *)infoDict;
+    }
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:infoDict
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    
+    NSString *jsonString = @"";
+    
+    if (! jsonData)
+    {
+        NSLog(@"Got an error: %@", error);
+    }else
+    {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符
+    
+   jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    return jsonString;
+}
 @end
