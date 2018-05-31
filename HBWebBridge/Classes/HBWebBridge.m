@@ -162,7 +162,7 @@
         }
         void (^callWKJSCallBackBlock)(NSString *,NSString * ,NSString *) = ^(NSString * windowCBName,NSString * errorMsg,NSString * reponseData){
             if ([errorMsg isKindOfClass:[NSString class]]) {
-                if (errorMsg.length == 0) {
+                if (errorMsg.length == 0 || [errorMsg isEqualToString:@"null"]) {
                     errorMsg = @"null";
                 }
                 else{
